@@ -1,0 +1,6 @@
+html { min-width: 320px; background: #073f42; }
+body { min-width: 320px; min-height: 100vh; margin: 0; background: #073f42; }
+body, button, input, textarea { -webkit-font-smoothing: antialiased; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid rgba(197, 156, 61, .58); outline-offset: 2px; }
+#root { min-height: 100vh; }
+
