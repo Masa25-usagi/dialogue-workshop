@@ -100,3 +100,67 @@ button:disabled { cursor: not-allowed; }
 @media (min-width: 761px) {
   .slide-canvas { aspect-ratio: 16 / 11; }
 }
+
+/* ============================================================
+   UI improvement pass (visual only)
+   - shared radius/easing tokens, consistent corner rounding
+   - hover & transition polish on interactive elements
+   - selection color aligned with the palette
+   ============================================================ */
+:root {
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 14px;
+  --ease-out: cubic-bezier(.22, .61, .36, 1);
+}
+
+::selection { background: var(--mint-strong); color: var(--ink); }
+
+/* Brand color for native checkboxes (consent checks) */
+input[type="checkbox"] { accent-color: var(--teal); }
+
+/* Rounded corners on major surfaces and controls */
+.entry-window, .meeting-frame, .meeting-dialog { border-radius: var(--radius-l); }
+.entry-option, .entry-primary, .entry-form input, .entry-form textarea, .consent-card, .preview-topic, .slide-option, .slide-text-form textarea, .stage-action-button, .reveal-button, .timer-controls button, .timer-controls input, .icon-button, .leave-button, .host-room-share button, .demo-role-toggle, .report-detail-grid section, .participant-list, .entry-safety, .form-error { border-radius: var(--radius-m); }
+.slide-canvas { border-radius: var(--radius-m); }
+.slide-canvas::before { border-radius: calc(var(--radius-m) - 2px); }
+.slide-canvas-inner { border-radius: var(--radius-s); }
+.response-track, .response-track span { border-radius: 999px; }
+.meeting-mode, .host-progress-badge { border-radius: 999px; }
+
+/* Transitions and hover states */
+.entry-primary { transition: background-color .18s var(--ease-out), border-color .18s var(--ease-out), box-shadow .18s var(--ease-out), transform .18s var(--ease-out); }
+.entry-primary:hover:not(:disabled) { background: var(--teal-dark); border-color: var(--teal-dark); box-shadow: 0 6px 16px rgba(10, 93, 96, .25); transform: translateY(-1px); }
+.entry-primary:active:not(:disabled) { transform: translateY(0); box-shadow: none; }
+
+.entry-back, .entry-footer button, .header-exit, .footer-link { transition: color .15s var(--ease-out); }
+.entry-back:hover, .entry-footer button:hover, .header-exit:hover, .footer-link:hover { color: var(--teal-dark); text-decoration: underline; text-underline-offset: 3px; }
+
+.icon-button, .timer-controls button, .host-room-share button { transition: border-color .15s var(--ease-out), background-color .15s var(--ease-out), color .15s var(--ease-out); }
+.icon-button:hover, .timer-controls button:hover, .host-room-share button:hover { border-color: var(--teal); background: var(--mint); color: var(--teal-dark); }
+
+.reveal-button { transition: box-shadow .15s var(--ease-out), background-color .15s var(--ease-out); }
+.reveal-button:hover { box-shadow: 0 3px 10px rgba(197, 156, 61, .38); }
+
+.demo-role-toggle { transition: border-color .15s var(--ease-out), background-color .15s var(--ease-out); }
+.demo-role-toggle:hover { background: #fdf3d7; }
+
+.leave-button { transition: background-color .15s var(--ease-out), color .15s var(--ease-out); }
+.leave-button:hover { background: #fbe8e2; }
+
+.participant-row { transition: background-color .15s var(--ease-out); }
+.participant-row:hover { background: #f2f7f0; }
+.participant-row.mine:hover { background: #e9f3ec; }
+
+.meeting-control { transition: color .15s var(--ease-out); }
+.meeting-control span { transition: background-color .15s var(--ease-out); }
+.meeting-control:hover { color: var(--ink-soft); }
+.meeting-control:hover span { background: #dae3da; }
+
+.entry-option .option-icon, .entry-option > svg { transition: transform .18s var(--ease-out); }
+.entry-option:hover .option-icon, .entry-option:hover > svg:last-child { transform: translateX(2px); }
+
+/* Full-bleed mobile layout keeps square corners */
+@media (max-width: 760px) {
+  .entry-window, .meeting-frame { border-radius: 0; }
+}
